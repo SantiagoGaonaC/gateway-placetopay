@@ -1,7 +1,4 @@
-﻿using System.Numerics;
-using System.Security.Cryptography;
-using System.Text;
-
+﻿
 namespace WebCheckoutPlacetopay.Models
 {
     public class APIAuth

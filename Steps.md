@@ -6,10 +6,6 @@ Nombre: Santiago Gaona Carvajal
 
 # PRIMER PUNTO:
 
-*Realice el consumo desde postman u otra herramienta para consumo de APIs con pagos básicos y documente el código fuente usado para consumir nuestras APIs, donde suministre la información mínima necesaria para realizar el proceso transaccional (revisar parámetros de entrada del servicio). Se deben compartir las evidencias con las respuestas del flujo transaccional finales 
-<u>(aprobada y rechazada)</u>.*
-
-
 ## Herramientas utilizadas
 
 Como parte del consumo y envío hacia el servicio Placetopay en un entorno .NET 6, se utilizaron las siguientes herramientas:
@@ -119,8 +115,6 @@ https://checkout-test.placetopay.com/api/session
 
 Estos parámetros de entrada permiten configurar adecuadamente la creación de una sesión de pago y son utilizados para realizar las solicitudes correspondientes al servicio Placetopay.
 
-
-
 **Consultar sesión (getRequestInformation) - Request utilizado:**
 
 Para consultar una sesión de pago utilizando el endpoint Consultar sesión (getRequestInformation), se realiza una solicitud POST a la siguiente URL:
@@ -158,8 +152,6 @@ Al realizar esta consulta, se obtiene trazabilidad y se puede obtener informaci�
 ## Ejemplos de flujo transaccional
 
 Como ejemplo de flujo transaccional se tiene la ejecución de pagos, en este caso se genera un pago aprobado y un pago rechazado, el flujo transaccional se puede ver con más detalle en [Diagrama](#diagrama)
-
-
 
 #### Pago Aprobado
 
@@ -199,6 +191,7 @@ A continuación se muestra un ejemplo de flujo transaccional para un **Pago Rech
 2. Se utiliza una tarjeta de prueba proporcionada para simular el pago rechazado. En este caso, se emplea una tarjeta Visa con los siguientes detalles:
    
    - Número de tarjeta: 4110760000000016
+   
    - Autenticación 3D Secure: Rechaza
      
      ![](C:\Users\sgaon\AppData\Roaming\marktext\images\2023-05-27-19-40-23-image.png)
@@ -321,3 +314,23 @@ Analista de implementación - Evertec Placetopay - Pasarela de pagos digitales
 # <a name="diagrama">Diagrama de flujo del proceso de pago</a>
 
 <img title="" src="file:///D:/Evertec/Prueba/DiagramaDeFlujoProcesoDePago.png" alt="DiagramaDeFlujoProcesoDePago.png" width="703" data-align="left">
+
+---
+
+## Descripción del Proceso de Pago con Placetopay API desde la Aplicación de línea de Comandos
+
+El programa implementa un flujo de pago utilizando la API de Placetopay. A continuación se presenta una descripción detallada del proceso:
+
+1. **Inicialización de Servicios**: En esta etapa, se inicializan los servicios necesarios para interactuar con la API de Placetopay. Estos servicios incluyen el servicio de comunicación API (`APICommunicationService`), el servicio de autenticación (`APIAuthService`) y el servicio de pago (`PaymentService`).
+
+2. **Carga de Configuración**: Se carga la configuración requerida desde un archivo `appsettings.json`. Este archivo contiene los valores necesarios para realizar la transacción, como el login, secretKey, descripción del pago, moneda, entre otros.
+
+3. **Generación de Autenticación**: Utilizando los valores de login y secretKey obtenidos de la configuración, se genera la autenticación requerida para realizar las solicitudes a la API de Placetopay. Esto se lleva a cabo utilizando el servicio de autenticación (`APIAuthService`).
+
+4. **Creación de Solicitud de Sesión de Pago**: Se crea una solicitud de sesión de pago (`APISessionRequest`) que contiene la información necesaria para procesar el pago. Esta solicitud incluye detalles como la referencia del pago, descripción, monto, etc. Además, se configura la autenticación generada previamente y otros detalles obtenidos de la configuración.
+
+5. **Envío de Solicitud de Sesión de Pago**: La solicitud de sesión de pago se envía a través del servicio de comunicación API (`APICommunicationService`). Una vez enviada la solicitud, se maneja la respuesta recibida. Si la respuesta indica un estado exitoso y contiene una URL de procesamiento, se abre esa URL en el navegador web para que el usuario pueda completar el pago.
+
+6. **Espera de Finalización del Pago**: Se inicia un ciclo de espera para verificar periódicamente el estado de la sesión de pago. Utilizando el servicio de comunicación API, se obtiene el estado actual de la sesión de pago y se verifica si el estado es "PENDING". Si el estado no es "PENDING", se interpreta como que el pago ha sido procesado y se finaliza el programa.
+
+---

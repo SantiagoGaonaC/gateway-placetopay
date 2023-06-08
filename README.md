@@ -1,6 +1,6 @@
 # gateway-placetopay
 
-Esta es una prueba para el Proceso de selección Analista de Implementación - Evertec Placetopay de ejemplo que muestra cómo utilizar la API de Placetopay para realizar pagos en línea utilizando Webcheckout.
+
 
 ## Configuración
 

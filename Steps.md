@@ -1,7 +1,5 @@
 Nombre: Santiago Gaona Carvajal
 
-# PRUEBA ANALISTA DE IMPLEMENTACIÓN PLACETOPAY
-
  ---
 
 # PRIMER PUNTO:
@@ -286,28 +284,7 @@ Un aspecto importante que encontré durante las pruebas es la necesidad de utili
 seed = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
 ```
 
-### Respuesta a remitir (Tipo Correo)
-
-Estimado cliente,
-
-Lamentamos los inconvenientes que ha estado experimentando con las transacciones. Tras revisar el problema, hemos identificado que se está produciendo un error de autenticación, específicamente "Autenticación fallida 103".
-
-Este error ocurre cuando la 'semilla' o timestamp que se envía durante el proceso de autenticación presenta una discrepancia de tiempo mayor a 5 minutos respecto al tiempo real GMT o local con zona horaria. Es vital que la sincronización del reloj de su servidor esté correctamente configurada para evitar este problema.
-
-Para identificar y solucionar la causa raíz del problema, le recomendamos realizar las siguientes validaciones:
-
-1. **Sincronización del reloj del servidor**: Verifique que la hora de su servidor esté correctamente sincronizada con un servicio de tiempo de red (NTP) para mantener la precisión del reloj. La semilla o timestamp enviada durante la autenticación debe ser una fecha en formato ISO 8601 y debe estar dentro de los 5 minutos de la hora actual GMT o local con zona horaria.
-
-2. **Generación del hash tranKey**: Asegúrese de que el hash tranKey se esté generando correctamente. Este valor se genera utilizando la operación: Base64(SHA-1(nonce + seed + secretKey)). Debe garantizar que el nonce, la seed (fecha y hora) y la secretKey se estén combinando correctamente para generar el hash tranKey.
-
-3. **Datos de autenticación**: Revise que los datos de login, tranKey, nonce y seed se estén enviando correctamente en la estructura auth. Todos estos elementos deben estar presentes y ser correctos para autenticarse con éxito.
-
-Por favor, realice estas validaciones y si el problema persiste, no dude en ponerse en contacto con nosotros para que podamos asistirle más a fondo.
-
-Saludos cordiales,
-
-Santiago Gaona Carvajal
-Analista de implementación - Evertec Placetopay - Pasarela de pagos digitales
+### 
 
 ---
 
